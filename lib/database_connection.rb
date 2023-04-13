@@ -15,12 +15,12 @@ class DatabaseConnection
   def self.connect(chitter_test)
     # If the environment variable (set by Render)
     # is present, use this to open the connection.
-    if ENV['DATABASE_URL'] != nil
+    if ENV['DATABASE_URL'] != nil #create this online when deploying
       @connection = PG.connect(ENV['DATABASE_URL'])
       return
     end
 
-    if ENV['ENV'] == 'test'
+    if ENV['ENV'] == 'test' #rspec is for test local host runs on chitter
       database_name = 'chitter_test'
     else
       database_name = 'chitter'

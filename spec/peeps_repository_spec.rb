@@ -24,7 +24,6 @@ describe PeepRepository do
     repo.create(new_peep)
 
     peeps = repo.all
-    p peeps
 
     expect(peeps.length).to eq(6)
     expect(peeps.first.message).to eq('Bubbles')
