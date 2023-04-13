@@ -2,7 +2,8 @@ require 'database_connection'
 require 'simplecov'
 require 'simplecov-console'
 DatabaseConnection.connect('chitter_test')
-
+ENV['ENV'] = 'test' # env must be set as test so our defs will use our chitter_test test otheriwse it will use main database.
+ 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
   # Want a nice code coverage website? Uncomment this next line!

@@ -10,17 +10,14 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
-  # context 'POST/peeps' do
-  #   xit 'create a peep' do  # this creates the peep
-  #     response = post('/peeps', text: "My first post!")
+  def reset_tables # the tables are reset so we extract info from the tbale after its been updated-can take in new data
+    seed.sql = File.read('chitter_seed.sql') 
+    connection = PG.connect({host: '127.0.0.1', dbname: 'chitter_test'})
+    connection.exec(seed_sql)
+  end
 
-  #     expect(response.status).to eq 200
-  #     expect(response.body).to eq('') # here we get no response YET
-
-  #     response = get('/peeps') # gets list of peeps
-
-  #     expect(response.body).to include("My first post!") # checks if peep has text to ensure it has been added to db
-  #   end
-  # end
-
+  before(:each) do
+    reset_tables
+  end
 end
+

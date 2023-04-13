@@ -24,17 +24,6 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get '/peeps' do
-    return erb(:peep) # this is the first thing the user sees
-  end
-
-  post '/peeps' do
-    repo = PeepRepository.new
-    new_peep = Peep.new
-    new_peep.text = params[:text]
-
-    repo.create(new_peep)
-    
-    return ''
+  get '/' do
   end
 end

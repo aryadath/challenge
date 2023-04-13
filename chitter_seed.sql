@@ -24,7 +24,7 @@ CREATE SEQUENCE IF NOT EXISTS peeps_id_seq;
 -- Table Definition
 CREATE TABLE "peeps" (
     "id" SERIAL,
-    "user_id" int
+    "user_id" int,
     "message" text,
     "peep_time" timestamp,
     PRIMARY KEY ("id")
@@ -37,7 +37,7 @@ VALUES
   ('Mia', 'mia@blip.com', 'dsfes');
 
 INSERT INTO peeps (user_id,message, peep_time) VALUES 
-(1, 'Sunny day','2022-04-09 11:00:00' ),
+(1, 'Sunny day','2022-04-05 11:00:00' ),
 (2, 'Hi guys','2022-05-09 10:00:00' ),
 (3, 'France','2022-06-09 09:00:00' ),
 (4, 'hurray','2022-03-09 10:00:00' ),
