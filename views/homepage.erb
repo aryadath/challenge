@@ -1,0 +1,14 @@
+<html>
+  <head></head>
+  <body>
+    <h1>Current Peeps!</h1>
+    <% @peeps.each do |peep| %> 
+      <p>
+        Peep: 
+        <%= peep.message %>
+        Peep time: 
+        <%= peep.peep_time %>
+      </p>
+    <% end %>
+  </body>
+</html>

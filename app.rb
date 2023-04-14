@@ -1,5 +1,8 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative 'lib/database_connection'
+require_relative 'lib/peeps_repository'
+require_relative 'lib/users_repository'
 
 # file: app.rb
 
@@ -24,6 +27,11 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get '/' do
+  get "/homepage" do
+    repo = PeepRepository.new
+    @peeps = repo.all 
+    return erb(:homepage)
   end
 end
+
+# _with_timestamps(DatabaseConnection)

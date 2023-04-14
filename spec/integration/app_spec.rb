@@ -10,14 +10,30 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
-  def reset_tables # the tables are reset so we extract info from the tbale after its been updated-can take in new data
-    seed.sql = File.read('chitter_seed.sql') 
-    connection = PG.connect({host: '127.0.0.1', dbname: 'chitter_test'})
-    connection.exec(seed_sql)
-  end
-
-  before(:each) do
-    reset_tables
+  context "GET /homepage" do
+    it 'should return a list of peeps with timestamps in html form' do
+      response = get('/homepage')
+  
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Sunny ')
+      expect(response.body).to include('Hi guys')
+      expect(response.body).to include('France')
+      expect(response.body).to include('hurray')
+      expect(response.body).to include('Monkeys')
+  
+      # Check for peep timestamps
+      # repo = PeepRepository.new
+      # peeps = repo.all_with_timestamps
+      # peeps.each do |peep|
+      #   expect(response.body).to include(peep.message)
+      #   expect(response.body).to include(peep.peep_time.to_s)
+      # end
+    end
   end
 end
 
+# expect(response.body).to include('France')
+#       expect(response.body).to include('Hi guys')
+#       expect(response.body).to include('Sunny day')
+#       expect(response.body).to include('hurray')
+#       expect(response.body).to include('Monkeys')
