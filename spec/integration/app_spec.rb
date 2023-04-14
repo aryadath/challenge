@@ -26,7 +26,7 @@ describe Application do
   context 'GET /login' do
     it "displays the login form" do
       get '/login'
-      expect(last_response).to be_ok
+      expect(last_response).to be_ok #another way of saying .to eq(200)
       expect(last_response.body).to include("Email")
       expect(last_response.body).to include("Password")
     end
@@ -38,6 +38,22 @@ describe Application do
       expect(last_request.path).to eq('/')
     end
   end
+
+  context 'GET /register' do
+    it "displays the register form" do
+      get '/register'
+      expect(last_response).to be_ok # wouldn't work as .to eq 200 as GET /register route is failing because the response status is not equal to 200. It looks like the response is returning a Rack::MockResponse object, which is not equal to the integer value 200.
+      expect(last_response.body).to include("Name")
+      expect(last_response.body).to include("Email")
+      expect(last_response.body).to include("Password")
+    end
+
+    it "registers in the user" do
+      post '/register',username:'Username', email: 'user@example.com', password: 'password'
+      expect(last_response).to be_redirect
+      follow_redirect!
+      expect(last_request.path).to eq('/')
+    end
+  end
 end
 
-# context 'POST /login'

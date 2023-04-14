@@ -45,6 +45,17 @@ class Application < Sinatra::Base
   
     redirect '/'
   end
+
+  get '/register' do
+    return erb(:register)
+  end
+
+  post '/register' do
+    username = params[:username]
+    email = params[:email]
+    password = params[:password]
+    redirect '/'
+  end
 end
 
 # _with_timestamps(DatabaseConnection)
