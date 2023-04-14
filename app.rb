@@ -32,6 +32,19 @@ class Application < Sinatra::Base
     @peeps = repo.all 
     return erb(:homepage)
   end
+
+  get '/login' do
+    erb :login
+  end
+  
+  post '/login' do
+    email = params[:email]
+    password = params[:password]
+  
+    # Your authentication login here
+  
+    redirect '/'
+  end
 end
 
 # _with_timestamps(DatabaseConnection)

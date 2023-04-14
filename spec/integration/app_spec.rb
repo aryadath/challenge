@@ -20,20 +20,24 @@ describe Application do
       expect(response.body).to include('France')
       expect(response.body).to include('hurray')
       expect(response.body).to include('Monkeys')
+    end
+  end
   
-      # Check for peep timestamps
-      # repo = PeepRepository.new
-      # peeps = repo.all_with_timestamps
-      # peeps.each do |peep|
-      #   expect(response.body).to include(peep.message)
-      #   expect(response.body).to include(peep.peep_time.to_s)
-      # end
+  context 'GET /login' do
+    it "displays the login form" do
+      get '/login'
+      expect(last_response).to be_ok
+      expect(last_response.body).to include("Email")
+      expect(last_response.body).to include("Password")
+    end
+
+    it "logs in the user" do
+      post '/login', email: 'user@example.com', password: 'password'
+      expect(last_response).to be_redirect
+      follow_redirect!
+      expect(last_request.path).to eq('/')
     end
   end
 end
 
-# expect(response.body).to include('France')
-#       expect(response.body).to include('Hi guys')
-#       expect(response.body).to include('Sunny day')
-#       expect(response.body).to include('hurray')
-#       expect(response.body).to include('Monkeys')
+# context 'POST /login'
