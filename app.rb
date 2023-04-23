@@ -1,3 +1,4 @@
+require 'bcrypt'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
@@ -27,6 +28,7 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+
   get "/homepage" do
     repo = PeepRepository.new
     @peeps = repo.all 
@@ -51,11 +53,13 @@ class Application < Sinatra::Base
   end
 
   post '/register' do
-    username = params[:username]
+    name = params[:name]
     email = params[:email]
     password = params[:password]
     redirect '/'
   end
-end
 
-# _with_timestamps(DatabaseConnection)
+  get '/logout' do
+    return erb(:logout)
+  end
+end

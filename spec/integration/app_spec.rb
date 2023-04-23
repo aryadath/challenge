@@ -49,10 +49,17 @@ describe Application do
     end
 
     it "registers in the user" do
-      post '/register',username:'Username', email: 'user@example.com', password: 'password'
+      post '/register',name:'name', email: 'user@example.com', password: 'password'
       expect(last_response).to be_redirect
       follow_redirect!
       expect(last_request.path).to eq('/')
+    end
+  end
+
+  context 'GET /logout' do
+    it "displays the logout page" do
+      get '/logout'
+
     end
   end
 end

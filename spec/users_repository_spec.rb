@@ -40,5 +40,14 @@ describe UserRepository do
     expect(users.last.email).to eq('mia@blip.com')
     expect(users.last.password).to eq('dsfes')
   end
+
+  it 'retrieves from a database' do 
+    repo = UserRepository.new
+    user = repo.retrieve_user_from_database('mia@blip.com') # retrieve user from database and store it in a variable
+  
+    expect(user.name).to eq('Mia')
+    expect(user.email).to eq('mia@blip.com')
+    expect(user.password).to eq('dsfes')
+  end
 end
 
