@@ -56,6 +56,16 @@ describe Application do
     end
   end
 
+  context 'POST/register' do
+    it "hashes the password before saving it to database" do
+      post "/register", name: "name", email: "user@example.com", password: "password"
+      expect(last_response).to be_redirect
+
+      user = UserRepository.new.retrieve_user_from_database("user@example.com")
+      expect(BCrypt::Password.new(user.hashed_password)).to eq("password")
+    end
+  end
+
   context 'GET /logout' do
     it "displays the logout page" do
       get '/logout'

@@ -53,9 +53,13 @@ class Application < Sinatra::Base
   end
 
   post '/register' do
+    hashed_password = BCrypt::Password.create(params[:password])
     name = params[:name]
     email = params[:email]
-    password = params[:password]
+  
+    user = User.new(name: name, email: email, hashed_password: hashed_password.to_s)
+    UserRepository.new.save(user)
+  
     redirect '/'
   end
 
